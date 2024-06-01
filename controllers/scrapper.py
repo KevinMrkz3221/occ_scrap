@@ -72,11 +72,17 @@ class Scrapper:
         return vacante
 
     def set_pages(self):
-        self.pages =  int(self.driver.find_element(By.CSS_SELECTOR, 'li.font-light:nth-child(4)').text)
+        try:
+            self.pages =  int(self.driver.find_element(By.CSS_SELECTOR, 'li.font-light:nth-child(4)').text)
+        except:
+            self.pages = 2
 
     def next_page(self):
-        btn = self.driver.find_elements(By.CSS_SELECTOR, 'ul[class="list-none pl-0 font-sans text-grey-600 text-sm"] > li > svg')[-1]
-        btn.click()
+        try:
+            btn = self.driver.find_elements(By.CSS_SELECTOR, 'ul[class="list-none pl-0 font-sans text-grey-600 text-sm"] > li > svg')[-1]
+            btn.click()
+        except:
+            pass
 
     def get_elements_data(self):
         elements = self.get_page_elements()
