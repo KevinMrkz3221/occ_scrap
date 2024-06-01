@@ -3,6 +3,7 @@ import argparse
 from datetime import date
 from selenium import webdriver
 from time import sleep
+import pathlib
 
 from controllers.writer import VacancyWriter
 from controllers.scrapper import Scrapper
@@ -38,9 +39,11 @@ except Exception as E:
 # Json Name
 JSON_FILE = f"data/{date.today()}.json"
 
-with open(JSON_FILE, 'w', encoding='utf-8') as f:
-    f.write("[]")
-    f.close()
+if not pathlib.Path(JSON_FILE).exists():
+    
+    with open(JSON_FILE, 'w', encoding='utf-8') as f:
+        f.write("[]")
+        f.close()
 
 vacancyController = VacancyWriter(JSON_FILE)
 SCRAPER = Scrapper(args, vacancyController, chrome_options, SLEEP)
