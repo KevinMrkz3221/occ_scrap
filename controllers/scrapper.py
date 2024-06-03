@@ -27,11 +27,24 @@ class Scrapper:
         elements = self.driver.find_elements(By.CSS_SELECTOR, 'div[class="flex flex-col relative z-1 m-0 p-0 box-border mx-auto"]')
         return elements
     
-    def get_vacancy_data(self, card):
-        titulo = card.find_element(By.CSS_SELECTOR, 'div[class="flex justify-between items-start mt-2"] > p').text
-        categorias = card.find_elements(By.CSS_SELECTOR, 'div[class="flex flex-col gap-2"] > div > a')
-        categoria = categorias[0].text
-        subcategoria = categorias[1].text
+    def get_vacancy_data(self, card, ciudad):
+
+        try:
+            titulo = card.find_element(By.CSS_SELECTOR, 'div[class="flex justify-between items-start mt-2"] > p').text
+        except:
+            titulo= ''
+        try:
+            categorias = card.find_elements(By.CSS_SELECTOR, 'div[class="flex flex-col gap-2"] > div > a')
+        except:
+            categoria = []
+
+        try:
+            categoria = categorias[0].text
+            subcategoria = categorias[1].text
+        except:
+            categoria = ''
+            subcategoria = ''
+
         try:
             educacion = card.find_element(By.XPATH, '/html/body/main/div[4]/div/div/div[8]/div[3]/span[2]').text
         except:
@@ -61,6 +74,7 @@ class Scrapper:
         vacante =  Vacante(
             id=_id,
             titulo=titulo,
+            ciudad=ciudad.strip(),
             url=url,
             categoria=categoria,
             subcategoria=subcategoria,
@@ -96,7 +110,12 @@ class Scrapper:
             try:
                 element.click()
                 self.SLEEP()
-                self.data.append(self.get_vacancy_data(card)) 
+                try:
+                    ciudad = element.find_element(By.CSS_SELECTOR, 'div > div:nth-child(1) > div:nth-child(5) > div:nth-child(1) > div:nth-child(2)').text
+                except:
+                    ciudad = ''
+
+                self.data.append(self.get_vacancy_data(card, ciudad)) 
             except:
                 pass
             

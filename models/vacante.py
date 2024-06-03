@@ -6,6 +6,7 @@ from dataclasses import dataclass
 class Vacante:
     id:str
     titulo:str
+    ciudad:str
     url: str
     categoria:str
     subcategoria:str
@@ -17,6 +18,7 @@ class Vacante:
         return {
             "id": self.id,
             "titulo": self.titulo,
+            "ciudad": self.ciudad,
             "url": self.url,
             "categoria": self.categoria,
             "educacion": self.educacion,
