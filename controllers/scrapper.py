@@ -100,7 +100,10 @@ class Scrapper:
 
     def get_elements_data(self):
         elements = self.get_page_elements()
-        elements[0].click()
+        try:
+            elements[0].click()
+        except:
+            pass
         self.SLEEP()
         try:
             card = self.driver.find_element(By.CSS_SELECTOR, 'div[class="hidden md:block md:col-span-7 overflow-hidden overflow-y-auto sticky overscroll-contain transition-all duration-300 jobDescription !h-[calc(100vh-232px)] !top-[216px]"]')
