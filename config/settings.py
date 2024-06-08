@@ -16,7 +16,7 @@ def SLEEP():
 parser = argparse.ArgumentParser(description="OCC Scrapper")
 parser.add_argument('--url', '-u', help="Agrega el url donde quieres iniciar el scraping Ejemplo: -u https://url.com")
 parser.add_argument('--sleep', '-s', type=int, help="Agrega el tiempo de sleep en segundos Ejemplo: -s 3")
-
+parser.add_argument('--name', '-n', type=str, help='Agrega el nombre del archivo Ejemplo: -n Chihuahua_today')
 ## 
 
 chrome_options = webdriver.ChromeOptions()
@@ -37,7 +37,7 @@ except Exception as E:
     print(f"La ruta de descarga ya existe \n {E}")
 
 # Json Name
-JSON_FILE = f"data/{date.today()}.json"
+JSON_FILE = f"data/{args.name}_{date.today()}.json"
 
 if not pathlib.Path(JSON_FILE).exists():
     
