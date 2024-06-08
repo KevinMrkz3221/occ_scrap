@@ -111,7 +111,10 @@ class Scrapper:
             pass
         for element in elements: 
             try:
-                element.click()
+                try:
+                    element.click()
+                except:
+                    pass
                 self.SLEEP()
                 try:
                     ciudad = element.find_element(By.CSS_SELECTOR, 'div > div:nth-child(1) > div:nth-child(5) > div:nth-child(1) > div:nth-child(2)').text
