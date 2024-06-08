@@ -32,12 +32,12 @@ MAIN_URL = 'https://www.occ.com.mx/'
 
 
 try:
-    os.mkdir('data')
+    os.mkdir('C:\\OCC_DATA')
 except Exception as E:
     print(f"La ruta de descarga ya existe \n {E}")
 
 # Json Name
-JSON_FILE = f"data/{args.name}_{date.today()}.json"
+JSON_FILE = f"C:\\OCC_DATA\\{args.name}_{date.today()}.json"
 
 if not pathlib.Path(JSON_FILE).exists():
     
